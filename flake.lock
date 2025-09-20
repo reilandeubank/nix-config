@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "dotfiles": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1758395880,
+        "narHash": "sha256-uUoEvhprfQLqZq9iCb1ZgW6Kg+IH+qYUOuOLFm7oABE=",
+        "owner": "reilandeubank",
+        "repo": "dotfiles",
+        "rev": "af380797fc225837988d5f5ba31ecc50997c873e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "reilandeubank",
+        "repo": "dotfiles",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -38,6 +54,7 @@
     },
     "root": {
       "inputs": {
+        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }

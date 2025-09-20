@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -75,6 +75,27 @@
       '';
     };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+
+    extraPackages = with pkgs; [
+     ripgrep
+     fd
+     tree-sitter
+     nil
+     lua-language-server
+     bun
+     typescript-language-server
+     ruff
+     shellcheck
+     stylua
+     gcc
+    ];
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -88,6 +109,10 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".config/nvim" = {
+      source = inputs.dotfiles + "/dot_config/nvim";
+      recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
