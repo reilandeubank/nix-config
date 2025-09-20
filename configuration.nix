@@ -2,15 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
-in
+{ config, pkgs, lib, inputs, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -105,120 +102,10 @@ in
     nerd-fonts.jetbrains-mono
   ];
 
-  home-manager.users.reilandeubank = {
-    home.stateVersion = "25.05";
-    home.packages = with pkgs.gnomeExtensions; [
-      appindicator
-      dash-to-dock
-      system-monitor
-      pop-shell
-    ];
-    dconf = {
-      enable = true;
-      settings."org/gnome/shell" = {
-        disable-user-extensions = false;
-	enabled-extensions = with pkgs.gnomeExtensions; [
-	  appindicator.extensionUuid
-	  dash-to-dock.extensionUuid
-	  system-monitor.extensionUuid
-	  pop-shell.extensionUuid
-	];
-      };
-      settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-    };
-
-    programs.zsh = {
-      enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-
-      oh-my-zsh = {
-        enable = true;
-	theme = "robbyrussell";
-	plugins = [
-	  "git"
-	  "sudo"
-	  "history"
-	  "fzf"
-	];
-      };
-      initContent = ''
-        export EDITOR=nvim
-	alias sd="cd ~ && cd \$(find * -type d | fzf)"
-      '';
-    };
-
-    programs.kitty = {
-      enable = true;
-      font = {
-        name = "JetBrainsMonoNF";
-	size = 11.0;
-      };
-
-      settings = {
-      # Font styles
-	    bold_font        = "JetBrainsMonoNF-Bold";
-	    italic_font      = "JetBrainsMonoNF-Italic";
-	    bold_italic_font = "JetBrainsMonoNF-BoldItalic";
-	    disable_ligatures = "never";
-
-	    # Transparency
-	    background_opacity = "0.9";
-
-	    # Basic colors
-	    foreground = "#CDD6F4";
-	    background = "#1E1E2E";
-	    selection_foreground = "#1E1E2E";
-	    selection_background = "#F5E0DC";
-
-	    # Cursor
-	    cursor            = "#F5E0DC";
-	    cursor_text_color = "#1E1E2E";
-
-	    # URL underline color
-	    url_color = "#F5E0DC";
-
-	    # Window borders
-	    active_border_color   = "#B4BEFE";
-	    inactive_border_color = "#6C7086";
-	    bell_border_color     = "#F9E2AF";
-
-	    # Titlebars
-	    wayland_titlebar_color = "#1E1E2E";
-
-	    # Tabs
-	    active_tab_foreground   = "#11111B";
-	    active_tab_background   = "#CBA6F7";
-	    inactive_tab_foreground = "#CDD6F4";
-	    inactive_tab_background = "#181825";
-	    tab_bar_background      = "#11111B";
-
-	    # Marks
-	    mark1_foreground = "#1E1E2E";
-	    mark1_background = "#B4BEFE";
-	    mark2_foreground = "#1E1E2E";
-	    mark2_background = "#CBA6F7";
-	    mark3_foreground = "#1E1E2E";
-	    mark3_background = "#74C7EC";
-
-	    # 16 terminal colors
-	    color0  = "#45475A";
-	    color8  = "#585B70";
-	    color1  = "#F38BA8";
-	    color9  = "#F38BA8";
-	    color2  = "#A6E3A1";
-	    color10 = "#A6E3A1";
-	    color3  = "#F9E2AF";
-	    color11 = "#F9E2AF";
-	    color4  = "#89B4FA";
-	    color12 = "#89B4FA";
-	    color5  = "#F5C2E7";
-	    color13 = "#F5C2E7";
-	    color6  = "#94E2D5";
-	    color14 = "#94E2D5";
-	    color7  = "#BAC2DE";
-	    color15 = "#A6ADC8";
-      };
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "reilandeubank" = import ./home.nix;
     };
   };
 
