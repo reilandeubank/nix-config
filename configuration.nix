@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz";
 in
@@ -21,10 +21,10 @@ in
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  fileSystems."mnt/media/media-share" = {
-    device = "192.168.0.100:/mnt/media/media-share";
-    fsType = "nfs";
-  };
+  # fileSystems."mnt/media/media-share" = {
+  #   device = "192.168.0.100:/mnt/media/media-share";
+  #   fsType = "nfs";
+  # };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -83,11 +83,13 @@ in
     #media-session.enable = true;
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
   programs.zsh.enable = true;
-
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.reilandeubank = {
     isNormalUser = true;
@@ -243,6 +245,9 @@ in
 	pop-icon-theme
 	fzf
   	wget
+	ripgrep
+	fd
+	lazygit
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
