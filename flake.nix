@@ -6,7 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     dotfiles = {
-      url = "github:reilandeubank/dotfiles";
+      url = "github:reilandeubank/nvim-config";
       flake = false;
     };
   };

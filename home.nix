@@ -53,6 +53,7 @@
     pop-gtk-theme
     libreoffice
     teams-for-linux
+    lutris
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
@@ -137,7 +138,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/nvim" = {
-      source = inputs.dotfiles + "/dot_config/nvim";
+      source = inputs.dotfiles;
       recursive = true;
     };
   };

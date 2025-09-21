@@ -3,16 +3,16 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1758395880,
-        "narHash": "sha256-uUoEvhprfQLqZq9iCb1ZgW6Kg+IH+qYUOuOLFm7oABE=",
+        "lastModified": 1758419162,
+        "narHash": "sha256-RAyqdr4OL/m7I9ptneSNltXKwkH+DtlLCfYycUcn04M=",
         "owner": "reilandeubank",
-        "repo": "dotfiles",
-        "rev": "af380797fc225837988d5f5ba31ecc50997c873e",
+        "repo": "nvim-config",
+        "rev": "ff49759638ce8b000e7686fd73b21300c93eb861",
         "type": "github"
       },
       "original": {
         "owner": "reilandeubank",
-        "repo": "dotfiles",
+        "repo": "nvim-config",
         "type": "github"
       }
     },

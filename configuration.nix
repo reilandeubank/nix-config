@@ -115,6 +115,9 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
