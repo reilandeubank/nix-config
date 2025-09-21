@@ -54,11 +54,15 @@
     libreoffice
     teams-for-linux
     lutris
+    noto-fonts
+    noto-fonts-color-emoji
+    ipafont
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
     gnomeExtensions.system-monitor
     gnomeExtensions.pop-shell
+    gnomeExtensions.kimpanel
   ];
 
   dconf = {
@@ -70,6 +74,7 @@
         dash-to-dock.extensionUuid
         system-monitor.extensionUuid
         pop-shell.extensionUuid
+        kimpanel.extensionUuid
       ];
     };
     settings."org/gnome/desktop/interface" = {
@@ -141,6 +146,15 @@
       source = inputs.dotfiles;
       recursive = true;
     };
+  };
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
   };
 
   # Home Manager can also manage your environment variables through
