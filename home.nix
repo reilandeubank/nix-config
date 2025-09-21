@@ -51,6 +51,8 @@
     pop-icon-theme
     lazygit
     pop-gtk-theme
+    libreoffice
+    teams-for-linux
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
