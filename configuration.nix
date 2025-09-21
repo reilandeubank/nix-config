@@ -120,21 +120,10 @@
   environment.systemPackages = with pkgs; [
 	# neovim
 	# kitty
-	steam
-	vlc
-	vscode-fhs
-	htop
-	fastfetch
-	localsend
-	discord
 	git
 	gh
-	pop-icon-theme
 	fzf
-  	wget
-	ripgrep
-	fd
-	lazygit
+  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
