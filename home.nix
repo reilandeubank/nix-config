@@ -56,7 +56,6 @@
     lutris
     noto-fonts
     noto-fonts-color-emoji
-    ipafont
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
