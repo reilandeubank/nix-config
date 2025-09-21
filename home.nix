@@ -50,6 +50,7 @@
     discord
     pop-icon-theme
     lazygit
+    pop-gtk-theme
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
@@ -68,7 +69,12 @@
         pop-shell.extensionUuid
       ];
     };
-    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    settings."org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+      gtk-theme = "Pop";
+      icon-theme = "Pop";
+      cursor-theme = "Pop";
+    };
   };
 
   programs.zsh = {
