@@ -143,7 +143,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
     ".config/nvim" = {
-      source = inputs.dotfiles;
+      source = inputs.nvim-config;
       recursive = true;
     };
   };

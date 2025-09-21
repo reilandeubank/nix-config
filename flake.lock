@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1758419162,
-        "narHash": "sha256-RAyqdr4OL/m7I9ptneSNltXKwkH+DtlLCfYycUcn04M=",
-        "owner": "reilandeubank",
-        "repo": "nvim-config",
-        "rev": "ff49759638ce8b000e7686fd73b21300c93eb861",
-        "type": "github"
-      },
-      "original": {
-        "owner": "reilandeubank",
-        "repo": "nvim-config",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -52,11 +36,27 @@
         "type": "github"
       }
     },
+    "nvim-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1758468340,
+        "narHash": "sha256-GfDS6pXPeUnaNWWOIMM2aP8Vnz7SSS878RJqpS4AN4Q=",
+        "owner": "reilandeubank",
+        "repo": "nvim-config",
+        "rev": "a39bf7a63ca5128c5ee61b47940bb29579f9434d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "reilandeubank",
+        "repo": "nvim-config",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nvim-config": "nvim-config"
       }
     }
   },

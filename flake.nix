@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    dotfiles = {
+    nvim-config = {
       url = "github:reilandeubank/nvim-config";
       flake = false;
     };
