@@ -22,10 +22,11 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # fileSystems."mnt/media/media-share" = {
-  #   device = "192.168.0.100:/mnt/media/media-share";
-  #   fsType = "nfs";
-  # };
+  fileSystems."/mnt/media/media-share" = {
+    device = "192.168.0.100:/mnt/media/media-share";
+    fsType = "nfs";
+    options = ["rw" "hard" "intr" "noatime"];
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -148,6 +149,7 @@
     gh
     fzf
     wget
+    nfs-utils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
