@@ -66,21 +66,37 @@
 
   dconf = {
     enable = true;
-    settings."org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = with pkgs.gnomeExtensions; [
-        appindicator.extensionUuid
-        dash-to-dock.extensionUuid
-        system-monitor.extensionUuid
-        pop-shell.extensionUuid
-        kimpanel.extensionUuid
-      ];
-    };
-    settings."org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-      gtk-theme = "Pop";
-      icon-theme = "Pop";
-      cursor-theme = "Pop";
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          appindicator.extensionUuid
+          dash-to-dock.extensionUuid
+          system-monitor.extensionUuid
+          pop-shell.extensionUuid
+          kimpanel.extensionUuid
+        ];
+      };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "Pop";
+        icon-theme = "Pop";
+        cursor-theme = "Pop";
+      };
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        dock-fixed = true; # keeps the dock always visible
+        intellihide = false; # disable intelligent hide
+        autohide = false; # don't auto-hide at all
+        show-trash = true; # show the trash can
+        show-mounts = true;
+        favorite-apps = [
+          "org.gnome.Nautilus.desktop"
+          "firefox.desktop"
+          "steam.desktop"
+          "code.desktop"
+          "kitty.desktop"
+        ];
+      };
     };
   };
 
