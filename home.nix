@@ -77,6 +77,10 @@
           kimpanel.extensionUuid
         ];
       };
+      "org/gnome/desktop/wm/preferences" = {
+        # Put buttons on the right (GNOME default order, plus minimize/maximize)
+        button-layout = ":minimize,maximize,close";
+      };
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         gtk-theme = "Pop";
@@ -87,7 +91,7 @@
         dock-fixed = true; # keeps the dock always visible
         intellihide = false; # disable intelligent hide
         autohide = false; # don't auto-hide at all
-        show-trash = true; # show the trash can
+        show-trash = false; # don't show the trash can
         show-mounts = true;
         favorite-apps = [
           "org.gnome.Nautilus.desktop"
@@ -118,6 +122,7 @@
     initContent = ''
              export EDITOR=nvim
       alias sd="cd ~ && cd \$(find * -type d | fzf)"
+      alias lgit="lazygit"
     '';
   };
 
