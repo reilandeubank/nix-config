@@ -54,6 +54,7 @@
     libreoffice
     teams-for-linux
     lutris
+    zoom-us
     noto-fonts
     noto-fonts-color-emoji
 
