@@ -55,6 +55,7 @@
     teams-for-linux
     lutris
     zoom-us
+    openrgb
     noto-fonts
     noto-fonts-color-emoji
 
