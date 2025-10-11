@@ -56,6 +56,7 @@
     lutris
     zoom-us
     openrgb
+    appimage-run
     noto-fonts
     noto-fonts-color-emoji
 
