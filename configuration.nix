@@ -71,6 +71,10 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
+  # COSMIC Desktop Environment
+  # services.displayManager.cosmic-greeter.enable = true;
+  # services.desktopManager.cosmic.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -143,8 +147,7 @@
     };
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # Some gaming specific options
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
@@ -155,8 +158,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # neovim
-    # kitty
+    geekbench
     git
     gh
     fzf

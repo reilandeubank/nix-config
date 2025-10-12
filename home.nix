@@ -39,21 +39,15 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    bun
     gcc
-    steam
     vlc
-    vscode-fhs
-    htop
-    fastfetch
     localsend
     discord
     pop-icon-theme
-    lazygit
     pop-gtk-theme
     libreoffice
     teams-for-linux
-    lutris
+    heroic
     zoom-us
     openrgb
     appimage-run
@@ -90,6 +84,11 @@
         icon-theme = "Pop";
         cursor-theme = "Pop";
       };
+      "org/gnome/desktop/background" = {
+        color-shading-type = "solid";
+        picture-uri-dark = "file:///home/reilandeubank/Pictures/alaska.jpg";
+        picture-uri = "file:///home/reilandeubank/Pictures/alaska.jpg";
+      };
       "org/gnome/shell/extensions/dash-to-dock" = {
         dock-fixed = true; # keeps the dock always visible
         intellihide = false; # disable intelligent hide
@@ -105,6 +104,21 @@
         ];
       };
     };
+  };
+
+  programs.bun.enable = true;
+  programs.fastfetch.enable = true;
+  programs.fzf.enable = true;
+  programs.go.enable = true;
+  programs.lazygit.enable = true;
+  programs.nix-your-shell.enable = true;
+  programs.lutris.enable = true;
+  programs.vscode.enable = true;
+  programs.htop.enable = true;
+
+  programs.firefox = {
+    enable = true;
+    enableGnomeExtensions = true;
   };
 
   programs.zsh = {
