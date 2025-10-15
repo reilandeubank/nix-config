@@ -40,6 +40,8 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     gcc
+    nodejs
+    azuredatastudio
     vlc
     localsend
     discord
@@ -113,8 +115,24 @@
   programs.lazygit.enable = true;
   programs.nix-your-shell.enable = true;
   programs.lutris.enable = true;
-  programs.vscode.enable = true;
   programs.htop.enable = true;
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        bbenoist.nix
+        vscodevim.vim
+        charliermarsh.ruff
+        brettm12345.nixfmt-vscode
+      ];
+      userSettings = {
+        "files.autoSave" = "afterDelay";
+        "files.autoSaveDelay" = 1000; # 1000 ms = 1 second delay
+      };
+    };
+  };
 
   programs.firefox = {
     enable = true;
