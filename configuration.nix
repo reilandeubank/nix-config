@@ -102,6 +102,14 @@
     #media-session.enable = true;
   };
 
+  # Enabling Sunshine game streaming
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
+    openFirewall = true;
+  };
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -148,9 +156,18 @@
   };
 
   # Some gaming specific options
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+
+  # Allow appimages in steam
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -159,11 +176,18 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     geekbench
+    citrix_workspace
     git
     gh
     fzf
     wget
     nfs-utils
+  ];
+
+  # Insecure packages required for citrix_workspace
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+    "libxml2-2.13.8"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

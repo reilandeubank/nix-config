@@ -42,6 +42,7 @@
     gcc
     nodejs
     azuredatastudio
+    google-chat-linux
     vlc
     localsend
     discord
