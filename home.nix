@@ -62,6 +62,7 @@
     gnomeExtensions.system-monitor
     gnomeExtensions.pop-shell
     gnomeExtensions.kimpanel
+    gnomeExtensions.clipboard-history
   ];
 
   dconf = {
@@ -75,6 +76,7 @@
           system-monitor.extensionUuid
           pop-shell.extensionUuid
           kimpanel.extensionUuid
+          clipboard-history.extensionUuid
         ];
       };
       "org/gnome/desktop/wm/preferences" = {
