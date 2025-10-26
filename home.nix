@@ -131,10 +131,15 @@
         vscodevim.vim
         charliermarsh.ruff
         brettm12345.nixfmt-vscode
+        esbenp.prettier-vscode
       ];
       userSettings = {
         "files.autoSave" = "afterDelay";
         "files.autoSaveDelay" = 1000; # 1000 ms = 1 second delay
+        "[javascript]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
+        "git.autofetch" = true;
       };
     };
   };
