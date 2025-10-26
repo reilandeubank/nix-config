@@ -10,7 +10,3 @@ To rebuild system:
 ```bash
 sudo nixos-rebuild switch --flake /etc/nixos
 ```
-```
-```
-```
-```
