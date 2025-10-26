@@ -70,6 +70,7 @@
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.gnome.gnome-browser-connector.enable = true;
 
   # COSMIC Desktop Environment
   # services.displayManager.cosmic-greeter.enable = true;

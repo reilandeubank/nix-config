@@ -140,7 +140,11 @@
 
   programs.firefox = {
     enable = true;
-    enableGnomeExtensions = true;
+    package = pkgs.firefox.override {
+      nativeMessagingHosts = [
+        pkgs.gnome-browser-connector
+      ];
+    };
   };
 
   programs.zsh = {
