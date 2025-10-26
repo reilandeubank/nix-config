@@ -164,13 +164,11 @@
   };
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   # Allow appimages in steam
   programs.appimage.enable = true;
   programs.appimage.binfmt = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

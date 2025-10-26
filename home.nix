@@ -54,6 +54,7 @@
     zoom-us
     openrgb
     appimage-run
+    code-cursor-fhs
     noto-fonts
     noto-fonts-color-emoji
 
