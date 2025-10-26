@@ -55,6 +55,7 @@
     openrgb
     appimage-run
     code-cursor-fhs
+    slack
     noto-fonts
     noto-fonts-color-emoji
 
