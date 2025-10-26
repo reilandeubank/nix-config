@@ -108,6 +108,87 @@
     autoStart = true;
     capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
     openFirewall = true;
+    applications = {
+      # Optional environment tweaks
+      env = {
+        PATH = "$(PATH):$(HOME)/.local/bin";
+      };
+
+      # Actual application list
+      apps = [
+        {
+          name = "My Steam";
+          auto-detach = true;
+          exclude-global-prep-cmd = false;
+
+          # detached = [
+          #   "${pkgs.writeShellScriptBin "steam_bigpicture_start" ''
+          #     #!/usr/bin/env bash
+          #     set -euo pipefail
+          #     xrandr \
+          #       --output DP-1 --off \
+          #       --output HDMI-1 --primary --mode 3840x2160 --rate 120 --pos 0x0 --rotate normal
+          #     setsid steam steam://open/bigpicture &
+          #   ''}/bin/steam_bigpicture_start"
+          # ];
+          command = [
+            "${pkgs.writeShellScriptBin "steam_bigpicture_start" ''
+              #!/usr/bin/env bash
+              set -euo pipefail
+              setsid steam steam://open/bigpicture &
+            ''}/bin/steam_bigpicture_start"
+          ];
+
+          prep-cmd = [
+            {
+              # Undo = close Big Picture + restore main monitor
+              # undo = "${pkgs.writeShellScriptBin "steam_bigpicture_stop" ''
+              #   #!/usr/bin/env bash
+              #   set -euo pipefail
+              #   setsid steam steam://close/bigpicture &
+              #   xrandr \
+              #     --output HDMI-1 --off \
+              #     --output DP-1 --primary --mode 2560x1440 --rate 144 --pos 0x0 --rotate normal
+              # ''}/bin/steam_bigpicture_stop";
+              do = "${pkgs.writeShellScriptBin "steam_bigpicture_start" ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                setsid steam steam://open/bigpicture &
+              ''}/bin/steam_bigpicture_start";
+              undo = "${pkgs.writeShellScriptBin "steam_bigpicture_stop" ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                setsid steam steam://close/bigpicture &
+              ''}/bin/steam_bigpicture_stop";
+            }
+          ];
+        }
+        {
+          name = "Witcher 3";
+          auto-detach = true;
+          exclude-global-prep-cmd = false;
+
+          detached = [
+            "steam://run/<292030>"
+          ];
+
+          prep-cmd = [
+            {
+              do = "${pkgs.writeShellScriptBin "steam_bigpicture_start" ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                setsid steam steam://open/bigpicture &
+              ''}/bin/steam_bigpicture_start";
+              undo = "${pkgs.writeShellScriptBin "steam_bigpicture_stop" ''
+                #!/usr/bin/env bash
+                set -euo pipefail
+                setsid steam steam://close/bigpicture &
+              ''}/bin/steam_bigpicture_stop";
+            }
+          ];
+        }
+      ];
+    };
   };
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
