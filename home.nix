@@ -44,7 +44,6 @@
     azuredatastudio
     google-chat-linux
     vlc
-    localsend
     discord
     pop-icon-theme
     pop-gtk-theme
