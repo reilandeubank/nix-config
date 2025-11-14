@@ -55,6 +55,7 @@
     appimage-run
     code-cursor-fhs
     slack
+    virt-viewer
     noto-fonts
     noto-fonts-color-emoji
 
