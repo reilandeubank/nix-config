@@ -50,7 +50,6 @@
     libreoffice
     teams-for-linux
     heroic
-    zoom-us
     openrgb
     appimage-run
     code-cursor-fhs
