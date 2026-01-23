@@ -55,9 +55,20 @@
     code-cursor-fhs
     slack
     codex
+    protontricks
+    jq
+    zenity
+    p7zip
+    freetype
+    fontconfig
+    xorg.libXrandr
+    xorg.libXcursor
+    xorg.libXinerama
+    xorg.libXi
     virt-viewer
     noto-fonts
     noto-fonts-color-emoji
+    rquickshare
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
