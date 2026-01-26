@@ -168,6 +168,14 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+    history = {
+      append = true;
+      share = true;
+      findNoDups = true;
+      ignoreDups = true;
+      ignoreSpace = true;
+    };
 
     oh-my-zsh = {
       enable = true;
@@ -177,13 +185,32 @@
         "sudo"
         "history"
         "fzf"
+        "ansible"
+        "chezmoi"
+        "colorize"
+        "common-aliases"
+        "docker"
       ];
     };
+
+    shellAliases = {
+      sd = "cd ~ && cd $(find * -type d | fzf)";
+      sdg = "cd /grmn/ && cd $(find * -type d | fzf)";
+      lg = "labgrid-client";
+      lgit = "lazygit";
+      ll = "ls -alF";
+    };
+
     initContent = ''
-             export EDITOR=nvim
-      alias sd="cd ~ && cd \$(find * -type d | fzf)"
-      alias lgit="lazygit"
+      export EDITOR=nvim
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     '';
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.neovim = {
