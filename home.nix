@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -69,6 +70,7 @@
     noto-fonts
     noto-fonts-color-emoji
     rquickshare
+    uv
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
@@ -126,7 +128,6 @@
 
   programs.bun.enable = true;
   programs.fastfetch.enable = true;
-  programs.fzf.enable = true;
   programs.go.enable = true;
   programs.lazygit.enable = true;
   programs.nix-your-shell.enable = true;
@@ -169,6 +170,9 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
+    sessionVariables = {
+      UV_PYTHON = "${pkgs.python3}/bin/python3";
+    };
     history = {
       append = true;
       share = true;
@@ -281,7 +285,11 @@
   #  /etc/profiles/per-user/reilandeubank/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    LD_LIBRARY_PATH = lib.makeLibraryPath [
+      pkgs.openssl
+      pkgs.zlib
+      pkgs.curl
+    ];
   };
 
   programs.kitty = {

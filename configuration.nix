@@ -7,7 +7,18 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  androidPackages = pkgs.androidenv.composeAndroidPackages {
+    platformVersions = ["34" "35"];
+    buildToolsVersions = ["34.0.0" "35.0.0"];
+    includeCmake = true;
+    cmakeVersions = ["3.22.1"];
+    includeNDK = true;
+    ndkVersions = ["27.1.12297006"];
+    includeEmulator = true;
+  };
+  androidSdkRoot = "${androidPackages.androidsdk}/libexec/android-sdk";
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -87,6 +98,8 @@
 
   services.hardware.openrgb.enable = true;
 
+  hardware.openrazer.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -117,12 +130,16 @@
   # services.xserver.libinput.enable = true;
 
   programs.zsh.enable = true;
+  programs.java = {
+    enable = true;
+    package = pkgs.jdk17;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.reilandeubank = {
     isNormalUser = true;
     description = "Reiland Eubank";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "adbusers" "openrazer"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -186,13 +203,22 @@
     fzf
     wget
     nfs-utils
+    android-tools
+    android-studio
+    androidPackages.androidsdk
+    openrazer-daemon
+    polychromatic
   ];
+
+  environment.sessionVariables.ANDROID_HOME = androidSdkRoot;
 
   # Insecure packages required for citrix_workspace
   nixpkgs.config.permittedInsecurePackages = [
     "libsoup-2.74.3"
     "libxml2-2.13.8"
   ];
+
+  nixpkgs.config.android_sdk.accept_license = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
