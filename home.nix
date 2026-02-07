@@ -170,9 +170,6 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
-    sessionVariables = {
-      UV_PYTHON = "${pkgs.python3}/bin/python3";
-    };
     history = {
       append = true;
       share = true;
@@ -206,9 +203,15 @@
     };
 
     initContent = ''
+      export UV_PYTHON="${pkgs.python3}/bin/python3"
       export EDITOR=nvim
       export NVM_DIR="$HOME/.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+      if [ -z "$UV_PYTHON" ] && [ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+        # Force a refresh of HM vars if another session already sourced them.
+        unset __HM_SESS_VARS_SOURCED
+        . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+      fi
     '';
   };
 
