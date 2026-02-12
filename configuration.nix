@@ -100,15 +100,6 @@ in {
 
   hardware.openrazer.enable = true;
 
-  # DaVinci Resolve GPU support (Rusticl/OpenCL on AMD)
-  environment.variables.RUSTICL_ENABLE = "radeonsi";
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      mesa.opencl # Enables Rusticl (OpenCL) support
-    ];
-  };
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -218,7 +209,6 @@ in {
     androidPackages.androidsdk
     openrazer-daemon
     polychromatic
-    davinci-resolve
   ];
 
   environment.sessionVariables.ANDROID_HOME = androidSdkRoot;
