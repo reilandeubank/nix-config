@@ -71,6 +71,7 @@
     noto-fonts-color-emoji
     rquickshare
     uv
+    gnumake
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
