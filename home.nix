@@ -54,6 +54,7 @@
     openrgb
     appimage-run
     code-cursor-fhs
+    cursor-cli
     slack
     codex
     protontricks
