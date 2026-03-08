@@ -124,6 +124,8 @@ in {
     openFirewall = true;
   };
 
+  services.tailscale.enable = true;
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -192,6 +194,8 @@ in {
     enable = true;
     openFirewall = true;
   };
+
+  programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

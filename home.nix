@@ -72,6 +72,7 @@
     rquickshare
     uv
     gnumake
+    prismlauncher
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
