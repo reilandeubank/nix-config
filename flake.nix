@@ -2,7 +2,9 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    # nixpkgs before ~2026-04 shipped claude-code from npm (2.1.88 was yanked → 404).
+    # Stay on a recent nixos-unstable; run `nix flake update` if claude-code fetch fails.
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # Pin an older nixpkgs that still contains webkitgtk_4_0
     nixpkgs-25-05.url = "github:NixOS/nixpkgs/nixos-25.05";
 

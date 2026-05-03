@@ -61,10 +61,10 @@
     p7zip
     freetype
     fontconfig
-    xorg.libXrandr
-    xorg.libXcursor
-    xorg.libXinerama
-    xorg.libXi
+    libxrandr
+    libxcursor
+    libxinerama
+    libxi
     virt-viewer
     noto-fonts
     noto-fonts-color-emoji
@@ -72,6 +72,7 @@
     uv
     gnumake
     prismlauncher
+    claude-code
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
@@ -132,7 +133,7 @@
   programs.go.enable = true;
   programs.lazygit.enable = true;
   programs.nix-your-shell.enable = true;
-  programs.lutris.enable = true;
+  # programs.lutris.enable = true;
   programs.htop.enable = true;
 
   programs.git = {
@@ -171,6 +172,8 @@
 
   programs.firefox = {
     enable = true;
+    # Keep profile in ~/.mozilla/firefox until you migrate to XDG config path
+    configPath = ".mozilla/firefox";
     package = pkgs.firefox.override {
       nativeMessagingHosts = [
         pkgs.gnome-browser-connector
@@ -238,6 +241,9 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+    # HM 26.05 default; explicit so stateVersion < 26.05 does not warn
+    withRuby = false;
+    withPython3 = false;
 
     extraPackages = with pkgs; [
       alejandra
