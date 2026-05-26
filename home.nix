@@ -80,6 +80,7 @@
     gnomeExtensions.pop-shell
     gnomeExtensions.kimpanel
     gnomeExtensions.clipboard-history
+    gnomeExtensions.hide-top-bar
   ];
 
   dconf = {
@@ -94,6 +95,7 @@
           pop-shell.extensionUuid
           kimpanel.extensionUuid
           clipboard-history.extensionUuid
+          hide-top-bar.extensionUuid
         ];
       };
       "org/gnome/desktop/wm/preferences" = {
@@ -111,10 +113,39 @@
         picture-uri-dark = "file:///home/reilandeubank/Pictures/alaska.jpg";
         picture-uri = "file:///home/reilandeubank/Pictures/alaska.jpg";
       };
+      "org/gnome/mutter" = {
+        experimental-features = ["variable-refresh-rate"];
+      };
+      # OLED care: blank screen after 5 minutes of idle
+      "org/gnome/desktop/session" = {
+        idle-delay = lib.hm.gvariant.mkUint32 300;
+      };
+      # OLED care: lock 30 seconds after screen blanks
+      "org/gnome/desktop/screensaver" = {
+        lock-enabled = true;
+        lock-delay = lib.hm.gvariant.mkUint32 30;
+      };
+      # OLED care: dim before blanking, don't suspend on AC (desktop)
+      "org/gnome/settings-daemon/plugins/power" = {
+        idle-dim = true;
+        sleep-inactive-ac-type = "nothing";
+      };
+      # OLED care: night light reduces blue channel intensity at night
+      "org/gnome/settings-daemon/plugins/color" = {
+        night-light-enabled = true;
+        night-light-schedule-automatic = true;
+        night-light-temperature = lib.hm.gvariant.mkUint32 4000;
+      };
+      # OLED care: hide top bar, reveal on mouse hover
+      "org/gnome/shell/extensions/hidetopbar" = {
+        enable-intellihide = false;
+        mouse-sensitive = true;
+        show-in-overview = true;
+      };
       "org/gnome/shell/extensions/dash-to-dock" = {
-        dock-fixed = true; # keeps the dock always visible
-        intellihide = false; # disable intelligent hide
-        autohide = false; # don't auto-hide at all
+        dock-fixed = false;
+        intellihide = false;
+        autohide = true;
         show-trash = false; # don't show the trash can
         show-mounts = true;
         favorite-apps = [
@@ -302,6 +333,7 @@
       pkgs.zlib
       pkgs.curl
     ];
+    NIXOS_OZONE_WL = "1";
   };
 
   programs.kitty = {
@@ -379,4 +411,31 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # OLED care: rotate wallpaper every 30 minutes to prevent background burn-in
+  systemd.user.services.wallpaper-rotate = {
+    Unit.Description = "Rotate desktop wallpaper";
+    Service = {
+      Type = "oneshot";
+      ExecStart = toString (pkgs.writeShellScript "wallpaper-rotate" ''
+        dir="$HOME/Pictures/Wallpapers"
+        img=$(${pkgs.findutils}/bin/find "$dir" -maxdepth 1 -type f \
+          \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \
+          -o -name "*.webp" -o -name "*.avif" \) \
+          | ${pkgs.coreutils}/bin/shuf -n 1)
+        [ -n "$img" ] || exit 0
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.background picture-uri "file://$img"
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.background picture-uri-dark "file://$img"
+      '');
+    };
+  };
+
+  systemd.user.timers.wallpaper-rotate = {
+    Unit.Description = "Rotate desktop wallpaper periodically";
+    Timer = {
+      OnBootSec = "1min";
+      OnUnitActiveSec = "30min";
+    };
+    Install.WantedBy = ["timers.target"];
+  };
 }

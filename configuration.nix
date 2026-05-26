@@ -159,10 +159,13 @@ in {
       antialias = true;
       hinting = {
         enable = true;
-        style = "full";
+        style = "slight"; # "full" over-sharpens on high-DPI/OLED
       };
       subpixel = {
-        rgba = "rgb";
+        # OLED panels (WOLED, QD-OLED) don't have a traditional RGB stripe layout;
+        # subpixel rendering causes color fringing on them
+        rgba = "none";
+        lcdfilter = "none";
       };
       allowBitmaps = false;
     };
@@ -181,10 +184,14 @@ in {
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
-  programs.gamescope.enable = true;
+  programs.gamescope = {
+    enable = true;
+    capSysNice = false;
+  };
 
   # Allow appimages in steam
   programs.appimage.enable = true;
@@ -213,6 +220,7 @@ in {
     androidPackages.androidsdk
     openrazer-daemon
     polychromatic
+    gamescope-wsi
   ];
 
   environment.sessionVariables.ANDROID_HOME = androidSdkRoot;
