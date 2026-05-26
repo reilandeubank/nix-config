@@ -98,8 +98,6 @@ in {
 
   services.hardware.openrgb.enable = true;
 
-  hardware.openrazer.enable = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -141,7 +139,7 @@ in {
   users.users.reilandeubank = {
     isNormalUser = true;
     description = "Reiland Eubank";
-    extraGroups = ["networkmanager" "wheel" "adbusers" "openrazer" "docker"];
+    extraGroups = ["networkmanager" "wheel" "adbusers" "docker"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -218,7 +216,6 @@ in {
     android-tools
     android-studio
     androidPackages.androidsdk
-    openrazer-daemon
     polychromatic
     gamescope-wsi
   ];

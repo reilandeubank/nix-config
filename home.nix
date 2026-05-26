@@ -73,6 +73,7 @@
     gnumake
     prismlauncher
     claude-code
+    audacity
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
