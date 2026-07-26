@@ -42,7 +42,6 @@
     # '')
     gcc
     nodejs
-    azuredatastudio
     vlc
     discord
     pop-icon-theme
@@ -74,6 +73,7 @@
     prismlauncher
     claude-code
     audacity
+    yt-dlp
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
