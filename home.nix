@@ -45,7 +45,6 @@
     vlc
     discord
     pop-icon-theme
-    pop-gtk-theme
     libreoffice
     teams-for-linux
     heroic
