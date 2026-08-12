@@ -206,7 +206,7 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     geekbench
-    citrix_workspace
+    citrix-workspace
     docker
     git
     gh

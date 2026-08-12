@@ -53,6 +53,7 @@
     code-cursor-fhs
     cursor-cli
     slack
+    google-chrome
     protontricks
     jq
     zenity
