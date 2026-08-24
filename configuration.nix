@@ -7,18 +7,7 @@
   lib,
   inputs,
   ...
-}: let
-  androidPackages = pkgs.androidenv.composeAndroidPackages {
-    platformVersions = ["34" "35" "36"];
-    buildToolsVersions = ["34.0.0" "35.0.0" "36.0.0"];
-    includeCmake = true;
-    cmakeVersions = ["3.22.1"];
-    includeNDK = true;
-    ndkVersions = ["27.1.12297006"];
-    includeEmulator = true;
-  };
-  androidSdkRoot = "${androidPackages.androidsdk}/libexec/android-sdk";
-in {
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -139,7 +128,7 @@ in {
   users.users.reilandeubank = {
     isNormalUser = true;
     description = "Reiland Eubank";
-    extraGroups = ["networkmanager" "wheel" "adbusers" "docker"];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -205,7 +194,6 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    geekbench
     citrix-workspace
     docker
     git
@@ -213,16 +201,9 @@ in {
     fzf
     wget
     nfs-utils
-    android-tools
-    android-studio
-    androidPackages.androidsdk
     polychromatic
     gamescope-wsi
   ];
-
-  environment.sessionVariables.ANDROID_HOME = androidSdkRoot;
-
-  nixpkgs.config.android_sdk.accept_license = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
