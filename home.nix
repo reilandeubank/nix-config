@@ -74,6 +74,7 @@
     claude-code
     audacity
     yt-dlp
+    rapidraw
 
     gnomeExtensions.appindicator
     gnomeExtensions.dash-to-dock
