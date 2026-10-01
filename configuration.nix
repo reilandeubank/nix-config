@@ -103,14 +103,6 @@
     #media-session.enable = true;
   };
 
-  # Enabling Sunshine game streaming
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
-    openFirewall = true;
-  };
-
   services.tailscale.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
