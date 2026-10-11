@@ -12,6 +12,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.home-manager.nixosModules.default
+    inputs.artcraft.nixosModules.default
   ];
 
   # Bootloader.
@@ -182,6 +183,11 @@
   };
 
   programs.nix-ld.enable = true;
+
+  programs.artcraft = {
+    enable = true;
+    apps = ["photocraft" "lightcraft"];
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

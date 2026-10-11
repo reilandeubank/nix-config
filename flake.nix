@@ -9,6 +9,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    artcraft.url = "github:ipeglin/artcraft-nix";
+    artcraft.inputs.nixpkgs.follows = "nixpkgs";
+
     nvim-config = {
       url = "github:reilandeubank/nvim-config";
       flake = false;
