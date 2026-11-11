@@ -20,6 +20,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = ["nfs"];
 
+  # CachyOS kernel (Zen 4-optimized build; runs on Zen 5). `pinned` overlay uses
+  # the nixpkgs rev nix-cachyos-kernel was built against, so it hits the cache.
+  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
+
   # Automatic updating
   system.autoUpgrade.enable = true;
   system.autoUpgrade.dates = "weekly";
@@ -107,6 +112,10 @@
   services.tailscale.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Binary cache for nix-cachyos-kernel (so the kernel isn't built locally)
+  nix.settings.extra-substituters = ["https://cache.lantian.pub/lantian"];
+  nix.settings.extra-trusted-public-keys = ["lantian:WVGO7vsRMSEN+h7Lp7kv6SAmrkEXgUGbbXm7jMDjBuQ="];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

@@ -12,6 +12,10 @@
     artcraft.url = "github:ipeglin/artcraft-nix";
     artcraft.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Release branch matches the binary cache. Do NOT make this follow our
+    # nixpkgs — upstream warns it causes patch/kernel version mismatches.
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
     nvim-config = {
       url = "github:reilandeubank/nvim-config";
       flake = false;
