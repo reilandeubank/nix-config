@@ -192,7 +192,16 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    citrix-workspace
+    # nixpkgs pins 26.08.0.153, which Citrix no longer offers for download;
+    # drop this override once nixpkgs catches up.
+    (citrix-workspace.overrideAttrs (old: rec {
+      version = "26.08.0.225";
+      src = requireFile {
+        name = "linuxx64-${version}.tar.gz";
+        sha256 = "185sbj67b12iz2s49g0q1ixby79r8c2xflsvl2fghmh6ap1d8ca2";
+        message = "nix-store --add-fixed sha256 linuxx64-${version}.tar.gz";
+      };
+    }))
     docker
     git
     gh
